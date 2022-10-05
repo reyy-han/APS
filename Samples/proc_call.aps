@@ -1,0 +1,1 @@
+[PROC p [x:int, y:bool] [ECHO 0]; CALL p 42 true;CALL p 42 false]

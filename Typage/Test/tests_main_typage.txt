@@ -1,0 +1,294 @@
+========================MAIN=TYPAGE2========================
+
+(add2.aps)
+[debug]  ?- main.
+Ecrit un programme: 
+|: prog([echo(app(id(add),[num(42),app(id(add),[num(8),num(42)])]))]).
+|> Type: void
+true.
+
+
+(add.aps)
+?- main.Ecrit un programme: 
+|: prog([echo(if(id(true),app(id(add),[app(id(mul),[num(42),num(3)]), num(40)]),app(id(sub),[app(id(div),[num(4),num(2)]),num(42)])))]).
+|> Type: void
+true.
+
+(def.aps)
+?- main.
+Ecrit un programme: 
+|: prog([const(id(x),bool,id(true)),echo(num(0))]).
+|> Type: void
+true.
+
+(eq.aps)
+  ?- main.
+Ecrit un programme: 
+|: prog([echo(app(id(eq),[num(45),num(4)]))]).
+
+false.
+// resultat attendu vu que l'on a pas le droit de faire Echo false
+
+(fun.aps)
+ ?- main.
+Ecrit un programme: 
+|: prog([fun(id(f),int,[(id(t),int)],app(id(add),[id(t),num(1)])),echo(app(id(f),[num(2)]))]).
+|> Type: void
+true.
+
+(fun2.aps)
+ ?- main.
+Ecrit un programme: 
+|: prog([fun(id(f),int,[(id(t),int),(id(y),int),(id(g),bool)],app(id(add),[id(t),num(1)])),echo(app(id(f),[num(1),num(2),id(true)]))]).
+|> Type: void
+true.
+
+// version fausse
+ ?- main.
+Ecrit un programme: 
+|: prog([fun(id(f),int,[(id(t),int),(id(y),int),(id(g),bool)],app(id(add),[id(t),num(1)])),echo(id(true))]).
+
+false. //attendu car echo true n'est pas accepté
+
+(funrec.aps)
+ ?- main.
+Ecrit un programme: 
+|: prog([funrec(id(f),int,[(id(t),int)],if(app(id(eq),[id(t),num(2)]),id(t),app(id(f),[app(id(add),[id(t),num(1)])]))),echo(app(id(f),[num(1)]))]).
+|> Type: void
+true.
+
+(if.aps)
+ ?- main.
+Ecrit un programme: 
+|: prog([echo(if(id(true),num(10),num(15)))]).
+|> Type: void
+true.
+
+
+(if2.aps)
+ ?- main.
+Ecrit un programme: 
+|: prog([echo(if(id(true),app(id(add),[num(45),num(26)]),lambda([(id(t),int)],app(id(add),[id(t),num(5)]))))]).
+|> Type: void
+true.
+
+(lambda.aps)
+ ?- main.Ecrit un programme: 
+|: prog([echo(lambda([(id(f),int),(id(g),int)],app(id(add),[id(f),num(5)])))]).
+|> Type: void
+true.
+
+(lambda2.aps)
+ ?- main.
+Ecrit un programme: 
+|: prog([echo(lambda([(id(x1),int),(id(x2),int),(id(b1),bool),(id(b2),bool)],if(id(false),app(id(add),[id(x1),id(x2)]),app(id(mul),[id(x1),id(x2)]))))]).
+|> Type: void
+true.
+
+(lambda_fun_const.aps)
+ ?- main.Ecrit un programme: 
+|: prog([const(id(x),int,num(6)),fun(id(g),int,[(id(t),int)],app(id(mul),[num(7),id(t)])),echo(lambda([(id(x),int)],app(id(add),[num(0),app(id(g),[id(x)])])))]).
+|> Type: void
+true.
+
+(lt.aps) erreur attendue car on ne peut pas faire echo false
+ ?- main.
+Ecrit un programme: 
+|: prog([echo(app(id(lt),[num(4),num(5)]))]).
+false.
+
+
+(minitest_set.aps) // erreur attendu car on utilise un const au lieu d'un var
+ ?- main.
+Ecrit un programme: 
+|: prog([const(id(x),bool,id(false)),set(id(x),id(true)),echo(num(1))]).
+
+false.
+
+(minitest_var.aps)
+ ?- main.
+Ecrit un programme: 
+|: prog([var(id(x),int),echo(num(2))]).
+|> Type: void
+true.
+
+//autre version si on rend directement x au lieu de 2
+ ?- main.
+Ecrit un programme: 
+|: prog([var(id(x),int),echo(id(x))]).
+|> Type: void
+true.
+
+(not.aps) //erreur attendue
+ ?- main.
+Ecrit un programme: 
+|: prog([echo(app(id(not),[id(true)]))]).
+
+false.
+
+(proc_call.aps)
+ ?- main.Ecrit un programme: 
+|: prog([proc(id(p),[(id(x),int),(id(y),bool)],[echo(num(0))]),call(id(p),[num(42),id(true)]),call(id(p),[num(42),id(false)])]).
+|> Type: void
+true.
+
+(procrec_statif_var_set_call.aps) // erreur attendu car on utilise pas les mots clefs var et adr
+ ?- main.Ecrit un programme: 
+|: prog([procrec(id(p),[(id(x),int),(id(y),bool)],[stat_if(id(y),[echo(id(x)),set(id(x),app(id(add),[id(x),num(1)]))],[set(id(x),app(id(add),[id(x),num(1)])),call(id(p),[id(x),app(id(not),[id(y)])])])]),var(id(a),int),set(id(a),num(42)),call(id(p),[id(a),id(false)]),echo(id(a))]).
+
+false.
+
+(procrec_statif_var_set_call2.aps) // maintenant si on utilise var et adr
+ ?- main.Ecrit un programme: 
+|: prog([procrec(id(p),[(var_id(x),int),(id(y),bool)],[stat_if(id(y),[echo(id(x)),set(id(x),app(id(add),[id(x),num(1)]))],[set(id(x),app(id(add),[id(x),num(1)])),call(id(p),[adr(x),app(id(not),[id(y)])])])]),var(id(a),int),set(id(a),num(42)),call(id(p),[adr(a),id(false)]),echo(id(a))]).
+|> Type: void
+true.
+
+(proc_stat_if_call.aps)
+ ?- main.
+Ecrit un programme: 
+|: prog([proc(id(p),[(id(x),int),(id(y),bool)],[stat_if(id(y),[echo(num(0))],[echo(id(x))])]),call(id(p),[num(42),id(true)]),call(id(p),[num(42),id(false)])]).
+|> Type: void
+true.
+
+(proc_while_call.aps)
+ ?- main.Ecrit un programme: 
+|: prog([proc(id(p),[(id(x),int),(id(y),bool)],[while(id(y),[echo(id(x))])]),call(id(p),[num(26),id(true)]),call(id(p),[num(42),id(false)])]).
+|> Type: void
+true.
+
+(prog0.aps)
+ ?- main.Ecrit un programme: 
+|: prog([echo(num(42))]).
+|> Type: void
+true.
+
+(prog1.aps) //erreur attendue car id(x) n'existe pas dans le contexte
+ ?- main.
+Ecrit un programme: 
+|: prog([echo(id(x))]).
+
+false.
+
+
+(prog2.aps)
+// meme erreur que prog1.aps
+ ?- main.
+Ecrit un programme: 
+|: prog([echo(app(id(add),[id(x),num(42)]))]).
+false.
+
+//correction possible
+ ?- main.
+Ecrit un programme: 
+|: prog([echo(app(id(add),[num(3),num(42)]))]).
+|> Type: void
+true.
+
+(prog4.aps)
+ ?- main.Ecrit un programme: 
+|: prog([echo(app(id(add),[app(id(mul),[num(42),num(1)]),app(id(sub),[app(id(div),[num(14),num(2)]),num(42)])]))]).
+|> Type: void
+true.
+
+(proc_fun_const.aps)
+ ?- main.Ecrit un programme: 
+|: prog([const(id(x),int,num(6)),fun(id(g),int,[(id(t),int)],app(id(mul),[num(7),id(t)])),echo(app(id(add),[num(0),app(id(g),[id(x)])]))]).
+|> Type: void
+true.
+
+(proc_set_fun.aps)
+ ?- main.Ecrit un programme: 
+|: prog([var(id(x),bool),set(id(x),id(true)),set(id(x),app(id(not),[id(x)])),fun(id(b2i),int,[(id(b),bool)],if(id(b),num(1),num(0))),echo(app(id(b2i),[id(x)]))]).
+|> Type: void
+true.
+
+(types.aps) // false attendu car echo bool est interdit
+ ?- main.Ecrit un programme: 
+|: prog([const(id(y),arc([bool,bool],bool),id(p)),echo(id(y))]).
+false.
+
+(typesfun.aps)
+ ?- main.
+Ecrit un programme: 
+|: prog([echo(lambda([(id(f),arc([int,int],int))],app(id(mul),[num(2),num(10)])))]).
+|> Type: void
+true.
+
+(var_set_echo.aps)
+ ?- main.Ecrit un programme: 
+|: prog([var(id(x),int),set(id(x),num(42)),echo(id(x))]).
+|> Type: void
+true.
+
+(set_erreur.aps)
+ ?- main.
+Ecrit un programme: 
+|: prog([const(id(x),int,num(0)),set(id(x),num(42))]).
+
+false.
+
+(stat_if.aps)
+ ?- main.
+Ecrit un programme: 
+|: prog([stat_if(id(true),[echo(num(2))],[echo(num(1))])]).
+|> Type: void
+true.
+
+
+(while.aps)
+ ?- main.
+Ecrit un programme: 
+|: prog([while(id(true),[echo(num(1))])]).
+|> Type: void
+true.
+========================MAIN=APS2========================
+
+(const_alloc1.aps)
+?- main.
+Ecrit un programme: 
+|: prog([const(id(x),vec(bool),alloc(num(3)))]).
+|> Type: void
+true.
+
+(const_alloc2.aps)
+?- main.
+Ecrit un programme: 
+|: prog([const(id(x),vec(int),alloc(num(10)))]).
+|> Type: void
+true
+
+(const_alloc_false.aps)
+?- main.
+Ecrit un programme: 
+|: prog([const(id(x),vec(int),alloc(id(true)))]).
+
+false.
+
+(const_echo_nth.aps)
+ ?- main.
+Ecrit un programme: 
+|: prog([const(id(x),vec(int),alloc(num(3))),echo(nth(id(x),num(0)))]).
+|> Type: void
+true.
+
+(const_echo_nth_false.aps) // car echo ne peut pas afficher un boolean
+[debug]  ?- main.
+Ecrit un programme: 
+|    prog([const(id(x),vec(bool),alloc(num(3))),echo(nth(id(x),num(0)))]).
+
+false.
+
+(const_echo_len.aps)
+ ?- main.
+Ecrit un programme: 
+|    prog([const(id(x),vec(bool),alloc(num(3))),echo(len(id(x)))]).
+|> Type: void
+true.
+
+(test_aps2_old.aps)
+ ?- main.
+Ecrit un programme: 
+|    prog([const(id(x),vec(bool),alloc(num(3))),set(lvnth(id(x),num(0)),id(true)),set(lvnth(id(x),num(1)),id(false)),set(lvnth(id(x),num(2)),id(true))]).
+|> Type: void
+true.

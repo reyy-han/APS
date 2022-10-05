@@ -1,0 +1,128 @@
+Liste de resultat prologterm:
+-----------------------------
+add2.aps:
+prog([echo(app(id(add),[num(42),app(id(add),[id(x),num(42)])]))]).
+
+---
+add.aps:
+prog([echo(if(id(true),app(id(add),[app(id(mul),[num(42),id(x)]),num(40)]),app(id(sub),[app(id(div),[id(y),num(2)]),num(42)])))]).
+
+---
+def.aps:
+prog([const(id(x),bool,id(true)),echo(num(0))]).
+
+---
+eq.aps:
+prog([echo(app(id(eq),[num(45),num(4)]))]).
+
+---
+fun.aps:
+prog([fun(id(f),int,[(id(t),int)],app(id(add),[id(t),num(1)])),echo(app(id(f),[num(2)]))]).
+
+
+---
+fun2.aps:
+prog([fun(id(f),int,[(id(t),int),(id(y),int),(id(g),bool)],app(id(add),[id(t),num(1)])),echo(app(id(f),[num(1),num(2),id(true)]))]).
+
+
+---
+funrec.aps:
+prog([funrec(id(f),int,[(id(t),int)],if(app(id(eq),[id(t),num(2)]),id(t),app(id(f),[app(id(add),[id(t),num(1)])]))),echo(app(id(f),[num(1)]))]).
+
+
+---
+if.aps:
+prog([echo(if(id(true),num(10),num(15)))]).
+
+---
+if2.aps:
+prog([echo(if(id(true),app(id(add),[num(45),num(26)]),lambda([(id(t),int)],app(id(add),[id(t),num(5)]))))]).
+
+---
+lambda.aps:
+prog([echo(lambda([(id(f),int),(id(g),int)],app(id(add),[id(f),num(5)])))]).
+
+---
+lambda2.aps:
+prog([echo(lambda([(id(x1),int),(id(x2),int),(id(b1),bool),(id(b2),bool)],if(id(false),app(id(add),[id(x1),id(x2)]),app(id(mul),[id(x1),id(x2)]))))]).
+
+---
+lambda_fun_const.aps:
+prog([const(id(x),int,num(6)),fun(id(g),int,[(id(t),int)],app(id(mul),[num(7),id(t)])),echo(lambda([(id(x),int)],app(id(add),[num(0),app(id(g),[id(x)])])))]).
+
+---
+lt.aps:
+prog([echo(app(id(lt),[num(4),num(5)]))]).
+
+---
+minitest_set.aps
+prog([const(id(x),bool,id(false)),set(id(x),id(true)),echo(num(1))]).
+
+---
+minitest_var.aps:
+prog([var(id(x),int),echo(num(2))]).
+
+---
+not.aps:
+prog([echo(app(id(not),[id(true)]))]).
+
+---
+proc_call :
+prog([proc(id(p),[(id(x),int),(id(y),bool)],[echo(num(0))]),call(id(p),[num(42),id(true)]),call(id(p),[num(42),id(false)])]).
+
+---
+procrec_statif_var_set_call.aps : (sans utiliser le mot clef var dans les types)
+prog([procrec(id(p),[(id(x),int),(id(y),bool)],[stat_if(id(y),[echo(id(x)),set(id(x),app(id(add),[id(x),num(1)]))],[set(id(x),app(id(add),[id(x),num(1)])),call(id(p),[id(x),app(id(not),[id(y)])])])]),var(id(a),int),set(id(a),num(42)),call(id(p),[id(a),id(false)]),echo(id(a))]).
+
+---
+proc_stat_if_call :
+prog([proc(id(p),[(id(x),int),(id(y),bool)],[stat_if(id(y),[echo(num(0))],[echo(id(x))])]),call(id(p),[num(42),id(true)]),call(id(p),[num(42),id(false)])]).
+
+proc_while_call.aps :
+prog([proc(id(p),[(id(x),int),(id(y),bool)],[while(id(y),[echo(id(x))])]),call(id(p),[num(26),id(true)]),call(id(p),[num(42),id(false)])]).
+
+---
+prog0.aps :
+prog([echo(num(42))]).
+prog1.aps :
+prog([echo(id(x))]).
+prog2.aps :
+prog([echo(app(id(add),[id(x),num(42)]))]).
+prog4.aps :
+prog([echo(app(id(add),[app(id(mul),[num(42),num(1)]),app(id(sub),[app(id(div),[num(14),num(2)]),num(42)])]))]).
+
+---
+proc_fun_const.aps :
+prog([const(id(x),int,num(6)),fun(id(g),int,[(id(t),int)],app(id(mul),[num(7),id(t)])),echo(app(id(add),[num(0),app(id(g),[id(x)])]))]).
+
+
+---
+proc_set_fun.aps :
+prog([var(id(x),bool),set(id(x),id(true)),set(id(x),app(id(not),[id(x)])),fun(id(b2i),int,[(id(b),bool)],if(id(b),num(1),num(0))),echo(app(id(b2i),[id(x)]))]).
+
+---
+types.aps :
+prog([const(id(y),arc([bool,bool],bool),id(p)),echo(id(y))]).
+typesfun.aps :
+prog([echo(lambda([(id(f),arc([int,int],int))],app(id(mul),[num(2),num(10)])))]).
+
+----
+var_set_echo.aps :
+prog([var(id(x),int),set(id(x),num(42)),echo(id(x))]).
+
+---
+stat_if.aps :
+prog([stat_if(id(true),[echo(num(2))],[echo(num(1))])]).
+while.aps :
+prog([while(id(true),[echo(num(1))])]).
+
+
+------------------------------------------------------
+/*le suivant ne doit pas fonctionner a la semantique*/
+prog([call(id(p),num(42),id(true)),call(id(p),num(42),id(false))]).
+
+
+
+
+
+

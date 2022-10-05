@@ -1,0 +1,7 @@
+[
+  PROC p [x:int, var y:int] [SET y (add x y)];
+  VAR z int;
+  SET z 3;
+  CALL p z (adr z);
+  ECHO z
+]

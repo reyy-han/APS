@@ -1,0 +1,7 @@
+[
+	PROC REC p [x:int, y:bool] [IF y [ECHO x; SET x (add x 1)] [SET x (add x 1); CALL p x (not y)]];
+	VAR a int;	
+	SET a 42;
+	CALL p a false;
+	ECHO a
+]

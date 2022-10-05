@@ -1,0 +1,2 @@
+[ CONST x int 6 ; FUN g int [ t : int ] (mul 7 t) ;
+ECHO (add 0 (g x)) ]

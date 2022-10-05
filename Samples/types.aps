@@ -1,0 +1,1 @@
+[ CONST y (bool * bool -> bool) p; ECHO y]

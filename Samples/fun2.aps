@@ -1,0 +1,1 @@
+[FUN f int [ t : int , y : int , g : bool] (add t 1); ECHO (f 1 2 true)]

@@ -1,0 +1,1 @@
+[ ECHO [ x1 : int, x2 : int, b1 : bool, b2 : bool ] (if false (add x1 x2) (mul x1 x2)) ]

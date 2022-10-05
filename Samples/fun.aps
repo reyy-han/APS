@@ -1,0 +1,1 @@
+[FUN f int [ t : int ] (add t 1) ; ECHO (f 2)]

@@ -1,0 +1,1 @@
+[ ECHO [ f : (int * int -> int) ] (mul 2 10) ]

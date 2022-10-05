@@ -1,0 +1,1 @@
+[FUN REC f int [ t : int ] (if (eq t 2) t (f (add t 1))) ; ECHO (f 1)]

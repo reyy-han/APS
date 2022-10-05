@@ -1,0 +1,1 @@
+[CONST x bool false; SET x true; ECHO 1]

@@ -1,0 +1,1 @@
+[VAR x bool; SET x true; SET x (not x); FUN b2i int [ b : bool ] (if b 1 0) ; ECHO (b2i x)]

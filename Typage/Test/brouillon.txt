@@ -1,0 +1,64 @@
+
+fonctionne au typage
+prog([const(id(x),vec(bool),alloc(num(3))),set(lvnth(id(x),num(0)),id(true)),set(lvnth(id(x),num(1)),id(false)),set(lvnth(id(x),num(2)),id(true))]).
+
+(test_aps2_old.aps)
+[
+  CONST x (vec bool) (alloc 3);
+  SET (nth x 0) true;
+  SET (nth x 1) false;
+  SET (nth x 2) true
+]
+
+----------------------------------------
+(const_alloc1.aps)  
+prog([const(id(x),vec(bool),alloc(num(3))),echo(num(4))]).
+[
+  CONST x (vec bool) (alloc 3); ECHO 4
+]
+
+(const_alloc2.aps)
+prog([const(id(x),vec(int),alloc(num(10))),echo(num(5))]).
+[
+  CONST x (vec int) (alloc 10); ECHO 5
+]
+
+(const_alloc_false.aps)
+prog([const(id(x),vec(int),alloc(id(true))),echo(num(6))]).
+[
+  CONST x (vec int) (alloc true); ECHO 6
+]
+
+----------------------------------------
+
+(const_echo_nth.aps)
+prog([const(id(x),vec(int),alloc(num(3))),echo(nth(id(x),num(0)))]).
+[
+  CONST x (vec int) (alloc 3);
+  ECHO (nth x 0)
+]
+
+(const_echo_nth_false.aps)
+prog([const(id(x),vec(bool),alloc(num(3))),echo(nth(id(x),num(0)))]).
+[
+  CONST x (vec bool) (alloc 3);
+  ECHO (nth x 0)
+]
+
+----------------------------------------
+
+(const_echo_len.aps)
+prog([const(id(x),vec(int),alloc(num(3))),echo(len(id(x)))]).
+[
+  CONST x (vec int) (alloc 3);
+  ECHO (len x)
+]
+
+?- main.Ecrit un programme: 
+|: prog([const(id(x),vec(bool),alloc(num(3))),set(lvnth(lv(x),num(0)),id(true))]).
+false.
+
+
+------------------------------------------------
+
+

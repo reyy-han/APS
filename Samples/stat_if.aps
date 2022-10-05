@@ -1,0 +1,1 @@
+[IF true [ECHO 2][ECHO 1]]
